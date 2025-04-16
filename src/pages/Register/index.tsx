@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  MenuItem,
-  TextField,
-  Typography,
-  Stack,
-  AlertColor,
-  Snackbar,
-  Alert,
-} from '@mui/material'
+import { Box, Button, MenuItem, TextField, Typography, Stack } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -18,6 +8,8 @@ import dayjs from 'dayjs'
 import { FormData } from './interfaces'
 import { schema } from './schema'
 import { useRegisterUser } from '../../services/useService'
+import { useSnackbar } from '../../hooks/useSnackbar'
+import { useNavigate } from 'react-router-dom'
 
 export default function Register() {
   const {
@@ -35,22 +27,17 @@ export default function Register() {
 
   const [loading, setLoading] = useState(false)
 
-  const [openSnackbar, setOpenSnackbar] = useState(false)
-  const [snackbarMessage, setSnackbarMessage] = useState('')
-  const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>('success')
-
-  const showSnackbar = (message: string, severity: AlertColor) => {
-    setSnackbarMessage(message)
-    setSnackbarSeverity(severity)
-    setOpenSnackbar(true)
-  }
+  const { showSnackbar } = useSnackbar()
 
   const { mutateAsync: registerUser } = useRegisterUser()
+
+  const navigate = useNavigate()
 
   const onSubmit = async (data: FormData) => {
     setLoading(true)
     try {
       await registerUser(data)
+      showSnackbar('Erro ao atualizar produto!', 'error')
       showSnackbar('Usuário registrado com sucesso!', 'success')
     } catch {
       showSnackbar('Erro ao registrar usuário.', 'error')
@@ -261,22 +248,9 @@ export default function Register() {
           </Button>
         </Stack>
       </form>
-
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={3000}
-        onClose={() => setOpenSnackbar(false)}
-        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-      >
-        <Alert
-          onClose={() => setOpenSnackbar(false)}
-          severity={snackbarSeverity}
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
+      <Button variant="text" fullWidth onClick={() => navigate('/login')} type="button">
+        Já possui uma conta? Faça o login
+      </Button>
     </Box>
   )
 }

@@ -1,14 +1,14 @@
-import { Alert, Avatar, Box, Button, Snackbar, Stack, TextField, Typography } from '@mui/material'
+import { Avatar, Box, Button, Stack, TextField, Typography } from '@mui/material'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { NumericFormat } from 'react-number-format'
 import { useState } from 'react'
 import { schema } from './schema'
 import { Product } from '../../services/useProducts'
+import { useSnackbar } from '../../hooks/useSnackbar'
 
 export default function NewProduct() {
   const [imagePreview, setImagePreview] = useState('')
-  const [openSnackbar, setOpenSnackbar] = useState(false)
 
   const {
     handleSubmit,
@@ -30,10 +30,11 @@ export default function NewProduct() {
       id: crypto.randomUUID(),
     },
   })
+  const { showSnackbar } = useSnackbar()
 
   const onSubmit = (data: Product) => {
     console.log('Produto demonstrativo enviado:', data)
-    setOpenSnackbar(true)
+    showSnackbar('Produto criado com sucesso', 'success')
     reset()
     setImagePreview('')
   }
@@ -172,12 +173,6 @@ export default function NewProduct() {
           </Button>
         </Stack>
       </form>
-
-      <Snackbar open={openSnackbar} autoHideDuration={5000} onClose={() => setOpenSnackbar(false)}>
-        <Alert severity={'success'} onClose={() => setOpenSnackbar(false)} variant="filled">
-          Produto criado com sucesso
-        </Alert>
-      </Snackbar>
     </Box>
   )
 }

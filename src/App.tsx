@@ -5,6 +5,7 @@ import queryClient from './utils/queryClient'
 import { AuthProvider } from './context/AuthContext'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { SnackbarProvider } from './hooks/useSnackbar'
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <AppRoutes />
+            <SnackbarProvider>
+              <AppRoutes />
+            </SnackbarProvider>
           </LocalizationProvider>
         </AuthProvider>
       </QueryClientProvider>

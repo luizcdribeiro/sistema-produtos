@@ -1,8 +1,8 @@
-import { Box, Button, Snackbar, TextField, Typography, Alert } from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
 import { useLoginMutation } from '../../services/authService'
+import { useSnackbar } from '../../hooks/useSnackbar'
 
 type LoginForm = {
   email: string
@@ -16,13 +16,9 @@ export default function Login() {
     formState: { errors },
   } = useForm<LoginForm>()
 
-  const navigate = useNavigate()
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: '',
-    severity: 'error' as 'error' | 'success' | 'warning',
-  })
+  const { showSnackbar } = useSnackbar()
 
+  const navigate = useNavigate()
   const { mutate: handleLogin, isPending } = useLoginMutation()
 
   const onSubmit = (data: LoginForm) => {
@@ -31,11 +27,7 @@ export default function Login() {
         navigate('/produtos')
       },
       onError: () => {
-        setSnackbar({
-          open: true,
-          message: 'Usuário ou senha inválidos',
-          severity: 'error',
-        })
+        showSnackbar('Erro ao atualizar produto!', 'error')
       },
     })
   }
@@ -81,23 +73,9 @@ export default function Login() {
         </Button>
       </form>
 
-      <Button variant="text" fullWidth onClick={() => navigate('/register')}>
+      <Button variant="text" fullWidth onClick={() => navigate('/login')}>
         Ainda não tem conta? Registre-se
       </Button>
-
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={4000}
-        onClose={() => setSnackbar({ ...snackbar, open: false })}
-      >
-        <Alert
-          severity={snackbar.severity}
-          onClose={() => setSnackbar({ ...snackbar, open: false })}
-          variant="filled"
-        >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
     </Box>
   )
 }

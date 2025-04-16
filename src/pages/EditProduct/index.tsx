@@ -1,14 +1,4 @@
-import {
-  Alert,
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  Snackbar,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Avatar, Box, Button, IconButton, Stack, TextField, Typography } from '@mui/material'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { NumericFormat } from 'react-number-format'
@@ -17,6 +7,7 @@ import { schema } from './schema'
 import { Product, useEditProduct, useProduto } from '../../services/useProducts'
 import { useParams } from 'react-router-dom'
 import { Delete } from '@mui/icons-material'
+import { useSnackbar } from '../../hooks/useSnackbar'
 
 export default function EditProduct() {
   const { id } = useParams<{ id: string }>()
@@ -25,8 +16,9 @@ export default function EditProduct() {
 
   const { mutate: editProduct } = useEditProduct()
 
+  const { showSnackbar } = useSnackbar()
+
   const [imagePreview, setImagePreview] = useState(produto?.avatar)
-  const [openSnackbar, setOpenSnackbar] = useState(false)
   const [imageName, setImageName] = useState('')
 
   const {
@@ -49,13 +41,11 @@ export default function EditProduct() {
   })
 
   const onSubmit = async (data: Product) => {
-    console.log('Produto atualizado:', data)
-
     try {
       await editProduct(data)
-      setOpenSnackbar(true)
+      showSnackbar(' Produto editado com sucesso', 'success')
     } catch (error) {
-      console.error('Erro ao editar o produto:', error)
+      showSnackbar(' Erro ao editar produto', 'error')
     }
   }
 
@@ -202,12 +192,6 @@ export default function EditProduct() {
           </Button>
         </Stack>
       </form>
-
-      <Snackbar open={openSnackbar} autoHideDuration={5000} onClose={() => setOpenSnackbar(false)}>
-        <Alert severity={'success'} onClose={() => setOpenSnackbar(false)} variant="filled">
-          Produto editado com sucesso
-        </Alert>
-      </Snackbar>
     </Box>
   )
 }
