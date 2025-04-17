@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, IconButton, Stack, TextField, Typography } from '@mui/material'
+import { Avatar, Button, IconButton, Stack, TextField, Typography } from '@mui/material'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { NumericFormat } from 'react-number-format'
@@ -8,6 +8,7 @@ import { Product, useEditProduct, useProduto } from '../../services/useProducts'
 import { useParams } from 'react-router-dom'
 import { Delete } from '@mui/icons-material'
 import { useSnackbar } from '../../hooks/useSnackbar'
+import { FormWrapper } from '../../components/FormWrapper'
 
 export default function EditProduct() {
   const { id } = useParams<{ id: string }>()
@@ -70,7 +71,7 @@ export default function EditProduct() {
   }
 
   return (
-    <Box maxWidth="600px" mx="auto" p={4}>
+    <FormWrapper>
       <Typography variant="h5" mb={2}>
         Cadastrar Produto
       </Typography>
@@ -86,6 +87,7 @@ export default function EditProduct() {
                 {...field}
                 error={!!errors.nome}
                 helperText={errors.nome?.message}
+                fullWidth
               />
             )}
           />
@@ -106,6 +108,7 @@ export default function EditProduct() {
                 }}
                 error={!!errors.preco}
                 helperText={errors.preco?.message}
+                fullWidth
               />
             )}
           />
@@ -119,6 +122,7 @@ export default function EditProduct() {
                 {...field}
                 error={!!errors.marca}
                 helperText={errors.marca?.message}
+                fullWidth
               />
             )}
           />
@@ -136,6 +140,7 @@ export default function EditProduct() {
                 }}
                 error={!!errors.qt_vendas}
                 helperText={errors.qt_vendas?.message}
+                fullWidth
               />
             )}
           />
@@ -153,6 +158,7 @@ export default function EditProduct() {
                 }}
                 error={!!errors.qt_estoque}
                 helperText={errors.qt_estoque?.message}
+                fullWidth
               />
             )}
           />
@@ -192,6 +198,6 @@ export default function EditProduct() {
           </Button>
         </Stack>
       </form>
-    </Box>
+    </FormWrapper>
   )
 }

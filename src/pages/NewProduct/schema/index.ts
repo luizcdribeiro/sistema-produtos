@@ -2,7 +2,6 @@ import * as yup from 'yup'
 
 export const schema = yup.object().shape({
   nome: yup.string().required('Nome é obrigatório'),
-  descricao: yup.string().required('Descrição é obrigatória'),
   preco: yup.string().required('Preço é obrigatório'),
   marca: yup.string().required('Marca é obrigatória'),
   avatar: yup.string().required('Imagem é obrigatória'),

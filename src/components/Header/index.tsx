@@ -1,10 +1,25 @@
-import { AppBar, Toolbar, Typography, Avatar, IconButton, Menu, MenuItem, Box } from '@mui/material'
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Avatar,
+  IconButton,
+  Menu,
+  MenuItem,
+  Box,
+  useTheme,
+} from '@mui/material'
 import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
+import { Brightness4, Brightness7 } from '@mui/icons-material'
+import { useThemeContext } from '../../context/ThemeContext'
 
 export default function Header() {
   const { user, logout } = useAuth()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
+  const theme = useTheme()
+  const { toggleTheme } = useThemeContext()
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -21,8 +36,12 @@ export default function Header() {
 
   return (
     <AppBar position="static" color="default" elevation={1}>
-      <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Typography variant="h6">Meu estoque</Typography>
         <Box display="flex" alignItems="center" gap={1}>
+          <IconButton onClick={toggleTheme} color="inherit">
+            {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+          </IconButton>
           <Typography variant="body1">{user?.nome}</Typography>
           <IconButton onClick={handleOpenMenu}>
             <Avatar src={user?.image} alt={user?.nome} />

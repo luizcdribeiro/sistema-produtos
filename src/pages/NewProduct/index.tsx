@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Stack, TextField, Typography } from '@mui/material'
+import { Avatar, Button, Stack, TextField, Typography } from '@mui/material'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { NumericFormat } from 'react-number-format'
@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { schema } from './schema'
 import { Product } from '../../services/useProducts'
 import { useSnackbar } from '../../hooks/useSnackbar'
+import { FormWrapper } from '../../components/FormWrapper'
 
 export default function NewProduct() {
   const [imagePreview, setImagePreview] = useState('')
@@ -20,7 +21,6 @@ export default function NewProduct() {
     resolver: yupResolver(schema),
     defaultValues: {
       nome: '',
-      descricao: '',
       preco: '',
       marca: '',
       avatar: '',
@@ -53,7 +53,7 @@ export default function NewProduct() {
   }
 
   return (
-    <Box maxWidth="600px" mx="auto" p={4}>
+    <FormWrapper>
       <Typography variant="h5" mb={2}>
         Cadastrar Produto
       </Typography>
@@ -69,21 +69,6 @@ export default function NewProduct() {
                 {...field}
                 error={!!errors.nome}
                 helperText={errors.nome?.message}
-              />
-            )}
-          />
-
-          <Controller
-            name="descricao"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Descrição"
-                multiline
-                rows={3}
-                {...field}
-                error={!!errors.descricao}
-                helperText={errors.descricao?.message}
               />
             )}
           />
@@ -173,6 +158,6 @@ export default function NewProduct() {
           </Button>
         </Stack>
       </form>
-    </Box>
+    </FormWrapper>
   )
 }

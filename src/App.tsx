@@ -6,17 +6,20 @@ import { AuthProvider } from './context/AuthContext'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { SnackbarProvider } from './hooks/useSnackbar'
+import { CustomThemeProvider } from './context/ThemeContext'
 
 function App() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <SnackbarProvider>
-              <AppRoutes />
-            </SnackbarProvider>
-          </LocalizationProvider>
+          <CustomThemeProvider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <SnackbarProvider>
+                <AppRoutes />
+              </SnackbarProvider>
+            </LocalizationProvider>
+          </CustomThemeProvider>
         </AuthProvider>
       </QueryClientProvider>
     </BrowserRouter>

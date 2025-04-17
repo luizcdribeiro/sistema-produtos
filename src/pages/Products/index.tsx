@@ -49,19 +49,18 @@ export default function Products() {
 
   return (
     <Box p={3}>
-      <Stack direction="row" justifyContent="space-between" mb={2}>
-        <TextField
-          label="Buscar produto"
-          variant="outlined"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
-        <Button variant="contained" onClick={() => navigate('/produtos/novo')}>
-          Novo Produto
-        </Button>
-      </Stack>
-
       <TableContainer component={Paper}>
+        <Stack direction="row" justifyContent="space-between" px={4} py={2}>
+          <TextField
+            label="Buscar produto"
+            variant="outlined"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+          <Button variant="contained" onClick={() => navigate('/produtos/novo')}>
+            Novo Produto
+          </Button>
+        </Stack>
         <Table>
           <TableHead>
             <TableRow>
