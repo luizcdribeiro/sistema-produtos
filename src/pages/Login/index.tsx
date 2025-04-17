@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '../../services/authService'
 import { useSnackbar } from '../../hooks/useSnackbar'
+import { FormWrapper } from '../../components/FormWrapper'
 
 type LoginForm = {
   email: string
@@ -33,49 +34,41 @@ export default function Login() {
   }
 
   return (
-    <Box
-      maxWidth={400}
-      mx="auto"
-      mt={10}
-      p={4}
-      display="flex"
-      flexDirection="column"
-      gap={2}
-      boxShadow={3}
-      borderRadius={2}
-    >
-      <Typography variant="h5" textAlign="center">
-        Login
-      </Typography>
+    <Box mt={10}>
+      <FormWrapper>
+        <Typography variant="h5" textAlign="center">
+          Login
+        </Typography>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          label="Email"
-          fullWidth
-          {...register('email', { required: 'Campo obrigatório' })}
-          error={!!errors.email}
-          helperText={errors.email?.message}
-          margin="normal"
-        />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            label="Email"
+            fullWidth
+            {...register('email', { required: 'Campo obrigatório' })}
+            error={!!errors.email}
+            helperText={errors.email?.message}
+            margin="normal"
+          />
 
-        <TextField
-          label="Senha"
-          type="password"
-          fullWidth
-          {...register('password', { required: 'Campo obrigatório' })}
-          error={!!errors.password}
-          helperText={errors.password?.message}
-          margin="normal"
-        />
+          <TextField
+            label="Senha"
+            type="password"
+            fullWidth
+            {...register('password', { required: 'Campo obrigatório' })}
+            error={!!errors.password}
+            helperText={errors.password?.message}
+            margin="normal"
+          />
 
-        <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }} disabled={isPending}>
-          {isPending ? 'Entrando...' : 'Entrar'}
+          <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }} disabled={isPending}>
+            {isPending ? 'Entrando...' : 'Entrar'}
+          </Button>
+        </form>
+
+        <Button variant="text" fullWidth onClick={() => navigate('/register')}>
+          Ainda não tem conta? Registre-se
         </Button>
-      </form>
-
-      <Button variant="text" fullWidth onClick={() => navigate('/login')}>
-        Ainda não tem conta? Registre-se
-      </Button>
+      </FormWrapper>
     </Box>
   )
 }

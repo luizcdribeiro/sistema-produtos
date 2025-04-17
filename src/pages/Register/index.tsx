@@ -10,6 +10,7 @@ import { schema } from './schema'
 import { useRegisterUser } from '../../services/useService'
 import { useSnackbar } from '../../hooks/useSnackbar'
 import { useNavigate } from 'react-router-dom'
+import { FormWrapper } from '../../components/FormWrapper'
 
 export default function Register() {
   const {
@@ -18,6 +19,7 @@ export default function Register() {
     setValue,
     control,
     formState: { errors },
+    watch,
   } = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -71,7 +73,7 @@ export default function Register() {
   }
 
   return (
-    <Box sx={{ maxWidth: 800, mx: 'auto', p: 4 }}>
+    <FormWrapper>
       <Typography variant="h4" gutterBottom>
         Registro
       </Typography>
@@ -187,6 +189,9 @@ export default function Register() {
                 inputLabel: {
                   shrink: true,
                 },
+                input: {
+                  readOnly: !!watch('cidade'),
+                },
               }}
             />
             <TextField
@@ -198,6 +203,9 @@ export default function Register() {
               slotProps={{
                 inputLabel: {
                   shrink: true,
+                },
+                input: {
+                  readOnly: !!watch('estado'),
                 },
               }}
             />
@@ -214,6 +222,9 @@ export default function Register() {
                 inputLabel: {
                   shrink: true,
                 },
+                input: {
+                  readOnly: !!watch('logradouro'),
+                },
               }}
             />
             <TextField
@@ -225,6 +236,9 @@ export default function Register() {
               slotProps={{
                 inputLabel: {
                   shrink: true,
+                },
+                input: {
+                  readOnly: !!watch('bairro'),
                 },
               }}
             />
@@ -251,6 +265,6 @@ export default function Register() {
       <Button variant="text" fullWidth onClick={() => navigate('/login')} type="button">
         Já possui uma conta? Faça o login
       </Button>
-    </Box>
+    </FormWrapper>
   )
 }

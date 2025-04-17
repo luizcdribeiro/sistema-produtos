@@ -20,7 +20,6 @@ export default function EditProduct() {
   const { showSnackbar } = useSnackbar()
 
   const [imagePreview, setImagePreview] = useState(produto?.avatar)
-  const [imageName, setImageName] = useState('')
 
   const {
     handleSubmit,
@@ -58,7 +57,6 @@ export default function EditProduct() {
     reader.onloadend = () => {
       const base64 = reader.result as string
       setValue('avatar', base64)
-      setImageName(file.name)
       setImagePreview(base64)
     }
     reader.readAsDataURL(file)
@@ -66,14 +64,13 @@ export default function EditProduct() {
 
   const handleImageRemove = () => {
     setImagePreview('')
-    setImageName('')
     setValue('avatar', '')
   }
 
   return (
     <FormWrapper>
       <Typography variant="h5" mb={2}>
-        Cadastrar Produto
+        Edição de produto
       </Typography>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -178,9 +175,6 @@ export default function EditProduct() {
             ) : (
               <Stack direction="row" alignItems="center" spacing={2}>
                 <Avatar src={imagePreview} alt="preview" sx={{ width: 100, height: 100 }} />
-                <Typography variant="body2" sx={{ flex: 1 }}>
-                  {imageName}
-                </Typography>
                 <IconButton onClick={handleImageRemove} color="error">
                   <Delete />
                 </IconButton>
@@ -194,7 +188,7 @@ export default function EditProduct() {
           )}
 
           <Button type="submit" variant="contained">
-            Cadastrar Produto
+            Editar produto
           </Button>
         </Stack>
       </form>

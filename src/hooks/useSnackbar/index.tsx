@@ -1,9 +1,7 @@
 import { Alert, AlertColor, Snackbar } from '@mui/material'
 import { createContext, useCallback, useContext, useState, ReactNode } from 'react'
-
-type SnackbarContextProps = {
-  showSnackbar: (message: string, severity?: AlertColor) => void
-}
+import './styles.scss'
+import { SnackbarContextProps } from './interfaces'
 
 const SnackbarContext = createContext<SnackbarContextProps | undefined>(undefined)
 
@@ -31,7 +29,7 @@ export const SnackbarProvider = ({ children }: { children: ReactNode }) => {
         onClose={handleClose}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <Alert onClose={handleClose} severity={severity} variant="filled" sx={{ width: '100%' }}>
+        <Alert onClose={handleClose} severity={severity} variant="filled" className="alert">
           {message}
         </Alert>
       </Snackbar>

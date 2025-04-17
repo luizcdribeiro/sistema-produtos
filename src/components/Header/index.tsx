@@ -1,3 +1,4 @@
+import './styles.scss'
 import {
   AppBar,
   Toolbar,
@@ -36,13 +37,13 @@ export default function Header() {
 
   return (
     <AppBar position="static" color="default" elevation={1}>
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Toolbar className={'header'}>
         <Typography variant="h6">Meu estoque</Typography>
-        <Box display="flex" alignItems="center" gap={1}>
+        <Box className={'userSection'}>
           <IconButton onClick={toggleTheme} color="inherit">
             {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
-          <Typography variant="body1">{user?.nome}</Typography>
+          <Typography className={'userName'}>{user?.nome}</Typography>
           <IconButton onClick={handleOpenMenu}>
             <Avatar src={user?.image} alt={user?.nome} />
           </IconButton>
