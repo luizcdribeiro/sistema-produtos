@@ -2,15 +2,16 @@ import { Box, Button, MenuItem, TextField, Typography, Stack } from '@mui/materi
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { FormData } from './interfaces'
 import { schema } from './schema'
-import { useRegisterUser } from '../../services/useService'
+import { useRegisterUser } from '../../services/userService'
 import { useSnackbar } from '../../hooks/useSnackbar'
 import { useNavigate } from 'react-router-dom'
 import { FormWrapper } from '../../components/FormWrapper'
+import { cepMask, cpfMask } from '../../utils/form'
+import { useAddressByCep } from '../../services/cepService'
 
 export default function Register() {
   const {
@@ -20,11 +21,14 @@ export default function Register() {
     control,
     formState: { errors },
     watch,
+    trigger,
   } = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       nascimento: dayjs().toDate(),
     },
+    mode: 'onChange',
+    reValidateMode: 'onChange',
   })
 
   const [loading, setLoading] = useState(false)
@@ -32,6 +36,9 @@ export default function Register() {
   const { showSnackbar } = useSnackbar()
 
   const { mutateAsync: registerUser } = useRegisterUser()
+
+  const cep = watch('cep') || ''
+  const { data: addressData, isFetching, isError } = useAddressByCep(cep, !!cep)
 
   const navigate = useNavigate()
 
@@ -48,29 +55,29 @@ export default function Register() {
     }
   }
 
-  const handleCEP = async (cep: string) => {
-    if (cep.length === 8) {
-      try {
-        const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json`)
+  useEffect(() => {
+    if (isFetching || !addressData) return
 
-        if (data.erro) {
-          showSnackbar('CEP não encontrado.', 'warning')
-          setValue('cidade', '')
-          setValue('estado', '')
-          setValue('logradouro', '')
-          setValue('bairro', '')
-          return
-        }
+    if (addressData.erro || isError) {
+      showSnackbar('CEP não encontrado.', 'warning')
 
-        setValue('cidade', data.localidade)
-        setValue('estado', data.uf)
-        setValue('logradouro', data.logradouro)
-        setValue('bairro', data.bairro)
-      } catch {
-        showSnackbar('Erro ao buscar endereço pelo CEP.', 'error')
-      }
+      const fieldsToClear = ['cidade', 'estado', 'logradouro', 'bairro']
+      fieldsToClear.forEach(field => setValue(field as keyof FormData, ''))
+      return
     }
-  }
+
+    const fieldsToUpdate: Partial<Record<keyof FormData, string>> = {
+      cidade: addressData.localidade,
+      estado: addressData.uf,
+      logradouro: addressData.logradouro,
+      bairro: addressData.bairro,
+    }
+
+    Object.entries(fieldsToUpdate).forEach(([field, value]) => {
+      setValue(field as keyof FormData, value)
+      trigger(field as keyof FormData)
+    })
+  }, [addressData, isFetching])
 
   return (
     <FormWrapper>
@@ -101,7 +108,12 @@ export default function Register() {
             <TextField
               label="CPF"
               fullWidth
-              {...register('cpf')}
+              value={cpfMask(watch('cpf') || '')}
+              onChange={e => {
+                const rawValue = e.target.value.replace(/\D/g, '')
+                setValue('cpf', rawValue)
+                trigger('cpf')
+              }}
               error={!!errors.cpf}
               helperText={errors.cpf?.message}
             />
@@ -165,20 +177,15 @@ export default function Register() {
             <TextField
               label="CEP"
               fullWidth
-              {...register('cep')}
+              value={cepMask(watch('cep') || '')}
               onChange={e => {
-                const value = e.target.value.replace(/\D/g, '')
-                setValue('cep', value)
-                handleCEP(value)
+                const rawCep = e.target.value.replace(/\D/g, '')
+                setValue('cep', rawCep)
               }}
               error={!!errors.cep}
               helperText={errors.cep?.message}
-              slotProps={{
-                inputLabel: {
-                  shrink: true,
-                },
-              }}
             />
+
             <TextField
               label="Cidade"
               fullWidth

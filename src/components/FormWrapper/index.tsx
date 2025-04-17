@@ -1,10 +1,6 @@
 import './styles.scss'
 import { Box, useTheme } from '@mui/material'
-import { ReactNode } from 'react'
-
-type FormWrapperProps = {
-  children: ReactNode
-}
+import { FormWrapperProps } from './interfaces'
 
 export const FormWrapper = ({ children }: FormWrapperProps) => {
   const theme = useTheme()

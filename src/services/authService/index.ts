@@ -1,21 +1,8 @@
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
-import { useAuth } from '../context/AuthContext'
-import { endpoints } from '../utils/endpoints'
-
-export type User = {
-  id: string
-  email: string
-  senha: string
-  token: string
-  nome: string
-  image: string
-}
-
-type LoginInput = {
-  email: string
-  password: string
-}
+import { useAuth } from '../../context/AuthContext'
+import { endpoints } from '../../utils/endpoints'
+import { LoginInput, User } from './interfaces'
 
 export const loginUser = async ({
   email,

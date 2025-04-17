@@ -16,13 +16,13 @@ import {
 import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { Edit, Delete } from '@mui/icons-material'
-import { useDeleteProduto, useProduto } from '../../services/useProducts'
+import { useDeleteProduct, useProduct } from '../../services/productsServices'
 
 export default function Product() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const { data: produto, isLoading } = useProduto(String(id))
-  const deleteProduto = useDeleteProduto()
+  const { data: produto, isLoading } = useProduct(String(id))
+  const deleteProduto = useDeleteProduct()
 
   const [openDialog, setOpenDialog] = useState(false)
 

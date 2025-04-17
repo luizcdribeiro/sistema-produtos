@@ -1,7 +1,6 @@
 import { createContext, useContext, useMemo, useState, ReactNode } from 'react'
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
-
-type ThemeMode = 'light' | 'dark'
+import { ThemeMode } from './interfaces'
 
 const ThemeContext = createContext({
   // eslint-disable-next-line @typescript-eslint/no-empty-function

@@ -1,14 +1,7 @@
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import { endpoints } from '../utils/endpoints'
-
-type ViaCepResponse = {
-  erro?: boolean
-  localidade: string
-  uf: string
-  logradouro: string
-  bairro: string
-}
+import { endpoints } from '../../utils/endpoints'
+import { ViaCepResponse } from './interfaces'
 
 export const fetchAddressByCep = async (cep: string): Promise<ViaCepResponse> => {
   const { data } = await axios.get(endpoints.getCep(cep))

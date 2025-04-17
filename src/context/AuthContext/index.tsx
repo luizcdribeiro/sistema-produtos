@@ -1,12 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { User } from './interfaces'
+import { AuthContextProps, User } from './interfaces'
 import axios from 'axios'
-
-interface AuthContextProps {
-  user: User | null
-  login: (user: User) => void
-  logout: () => void
-}
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
 

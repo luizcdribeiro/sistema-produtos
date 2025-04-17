@@ -13,10 +13,17 @@ export function isValidCPF(cpf: string): boolean {
   return rest === +cpf[10]
 }
 
-export function cpfMask(value: string) {
+export function cpfMask(value: string): string {
   return value
-    ?.replace(/\D/g, '')
+    .replace(/\D/g, '')
     .replace(/(\d{3})(\d)/, '$1.$2')
     .replace(/(\d{3})(\d)/, '$1.$2')
     .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
+}
+
+export function cepMask(value: string): string {
+  return value
+    .replace(/\D/g, '')
+    .replace(/^(\d{5})(\d{0,3})/, '$1-$2')
+    .slice(0, 9)
 }

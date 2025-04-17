@@ -4,11 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '../../services/authService'
 import { useSnackbar } from '../../hooks/useSnackbar'
 import { FormWrapper } from '../../components/FormWrapper'
-
-type LoginForm = {
-  email: string
-  password: string
-}
+import { LoginForm } from './interfaces'
 
 export default function Login() {
   const {

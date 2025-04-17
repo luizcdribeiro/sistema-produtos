@@ -1,18 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { endpoints } from '../utils/endpoints'
-import queryClient from '../utils/queryClient'
-
-export type Product = {
-  avatar: string
-  createdAt: string
-  id?: string
-  marca: string
-  nome: string
-  preco: string
-  qt_estoque: number
-  qt_vendas: number
-}
+import { endpoints } from '../../utils/endpoints'
+import queryClient from '../../utils/queryClient'
+import { Product } from './interfaces'
 
 export const useProducts = () => {
   return useQuery<Product[]>({
@@ -24,7 +14,7 @@ export const useProducts = () => {
   })
 }
 
-export const useProduto = (id: string) => {
+export const useProduct = (id: string) => {
   return useQuery<Product>({
     queryKey: ['produto', id],
     queryFn: async () => {
@@ -35,7 +25,7 @@ export const useProduto = (id: string) => {
   })
 }
 
-export const useDeleteProduto = () => {
+export const useDeleteProduct = () => {
   return useMutation({
     mutationFn: async (id: string) => {
       await axios.delete(endpoints.deleteProduct(id))
