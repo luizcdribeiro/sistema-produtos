@@ -6,6 +6,7 @@ const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user')
@@ -16,6 +17,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(parsedUser)
       axios.defaults.headers.common.Authorization = `Bearer ${token}`
     }
+
+    setLoading(false)
   }, [])
 
   const login = (userData: User) => {
@@ -32,7 +35,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     delete axios.defaults.headers.common.Authorization
   }
 
-  return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={{ user, login, logout, loading }}>{children}</AuthContext.Provider>
+  )
 }
 
 export const useAuth = () => useContext(AuthContext)

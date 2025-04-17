@@ -37,7 +37,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,scss,md}'",
-    "homepage": "https://luizcdribeiro.github.io/sistema-produtos/",
+    "homepage": "https://luizcdribeiro.github.io/sistema-produtos/login",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
