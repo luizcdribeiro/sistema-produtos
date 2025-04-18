@@ -39,7 +39,6 @@ export const useDeleteProduct = () => {
 export const useEditProduct = () => {
   return useMutation({
     mutationFn: async (product: Product) => {
-      // Enviar o produto no corpo da requisição PUT
       await axios.put(endpoints.editProduct(product.id as string), product)
     },
     onSuccess: () => {

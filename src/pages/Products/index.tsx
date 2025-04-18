@@ -50,7 +50,7 @@ export default function Products() {
   return (
     <Box p={3}>
       <TableContainer component={Paper}>
-        <Stack direction="row" justifyContent="space-between" px={4} py={2}>
+        <Stack direction="row" justifyContent="space-between" alignItems="center" px={4} py={2}>
           <TextField
             label="Buscar produto"
             variant="outlined"

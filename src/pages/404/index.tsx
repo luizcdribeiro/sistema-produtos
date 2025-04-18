@@ -8,7 +8,7 @@ export default function NotFound() {
     <Box className="not-found">
       <ErrorOutlineIcon className="icon" />
       <Typography variant="h4" className="title">
-        404 - Página não encontrada
+        Página não encontrada
       </Typography>
       <Typography variant="body1" className="message">
         Ops! A página que você tentou acessar não existe ou foi movida.

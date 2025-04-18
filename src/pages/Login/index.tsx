@@ -61,7 +61,7 @@ export default function Login() {
           </Button>
         </form>
 
-        <Button variant="text" fullWidth onClick={() => navigate('/register')}>
+        <Button variant="text" fullWidth type="button" onClick={() => navigate('/register')}>
           Ainda não tem conta? Registre-se
         </Button>
       </FormWrapper>

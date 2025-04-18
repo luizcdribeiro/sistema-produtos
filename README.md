@@ -1,5 +1,7 @@
 # 🛒 Sistemas de Produtos
 
+![Demonstração do Sistema](./assets/demo.gif)
+
 Sistema web para gerenciamento de produtos com funcionalidades de registro, login, criação, edição e listagem de produtos.
 
 ---

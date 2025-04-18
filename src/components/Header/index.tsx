@@ -48,7 +48,7 @@ export default function Header() {
             <Avatar src={user?.image} alt={user?.nome} />
           </IconButton>
           <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout}>Sair da conta</MenuItem>
           </Menu>
         </Box>
       </Toolbar>
