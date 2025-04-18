@@ -1,10 +1,9 @@
 export const endpoints = {
-  postRegisterUser: () => 'https://6256fc506ea7037005434e84.mockapi.io/api/v1/user',
-  getCep: (cep: string) => `https://viacep.com.br/ws/${cep}/json`,
-  getUser: (email: string) =>
-    `https://6256fc506ea7037005434e84.mockapi.io/api/v1/user?search=${email}`,
-  getProducts: () => 'https://6256fc506ea7037005434e84.mockapi.io/api/v1/produto',
-  getProduct: (id: string) => `https://6256fc506ea7037005434e84.mockapi.io/api/v1/produto/${id}`,
-  deleteProduct: (id: string) => `https://6256fc506ea7037005434e84.mockapi.io/api/v1/produto/${id}`,
-  editProduct: (id: string) => `https://6256fc506ea7037005434e84.mockapi.io/api/v1/produto/${id}`,
+  postRegisterUser: () => `${process.env.REACT_APP_API_BASE_URL}/user`,
+  getCep: (cep: string) => `${process.env.REACT_APP_VIACEP_URL}/${cep}/json`,
+  getUser: (email: string) => `${process.env.REACT_APP_API_BASE_URL}/user?search=${email}`,
+  getProducts: () => `${process.env.REACT_APP_API_BASE_URL}/produto`,
+  getProduct: (id: string) => `${process.env.REACT_APP_API_BASE_URL}/produto/${id}`,
+  deleteProduct: (id: string) => `${process.env.REACT_APP_API_BASE_URL}/produto/${id}`,
+  editProduct: (id: string) => `${process.env.REACT_APP_API_BASE_URL}/produto/${id}`,
 }

@@ -42,12 +42,14 @@ export default function EditProduct() {
   })
 
   const onSubmit = async (data: Product) => {
-    try {
-      await editProduct(data)
-      showSnackbar(' Produto editado com sucesso', 'success')
-    } catch (error) {
-      showSnackbar(' Erro ao editar produto', 'error')
-    }
+    await editProduct(data, {
+      onSuccess: () => {
+        showSnackbar(' Produto editado com sucesso', 'success')
+      },
+      onError: () => {
+        showSnackbar(' Erro ao editar produto', 'error')
+      },
+    })
   }
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

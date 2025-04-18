@@ -17,6 +17,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { Edit, Delete } from '@mui/icons-material'
 import { useDeleteProduct, useProduct } from '../../services/productsServices'
+import { useSnackbar } from '../../hooks/useSnackbar'
 
 export default function Product() {
   const { id } = useParams<{ id: string }>()
@@ -26,11 +27,21 @@ export default function Product() {
 
   const [openDialog, setOpenDialog] = useState(false)
 
+  const { showSnackbar } = useSnackbar()
+
   const handleDelete = () => {
     deleteProduto.mutate(String(id), {
       onSuccess: () => {
         setOpenDialog(false)
-        navigate('/produtos')
+
+        showSnackbar('Produto excluído com sucesso!', 'success')
+
+        setTimeout(() => {
+          navigate('/produtos')
+        }, 3000)
+      },
+      onError: () => {
+        showSnackbar('Erro ao excluir produto, tente novamente!', 'error')
       },
     })
   }

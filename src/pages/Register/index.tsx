@@ -35,7 +35,7 @@ export default function Register() {
 
   const { showSnackbar } = useSnackbar()
 
-  const { mutateAsync: registerUser } = useRegisterUser()
+  const { mutate: registerUser } = useRegisterUser()
 
   const cep = watch('cep') || ''
   const { data: addressData, isFetching, isError } = useAddressByCep(cep, !!cep)
@@ -44,15 +44,17 @@ export default function Register() {
 
   const onSubmit = async (data: FormData) => {
     setLoading(true)
-    try {
-      await registerUser(data)
-      showSnackbar('Erro ao atualizar produto!', 'error')
-      showSnackbar('Usuário registrado com sucesso!', 'success')
-    } catch {
-      showSnackbar('Erro ao registrar usuário.', 'error')
-    } finally {
-      setLoading(false)
-    }
+    await registerUser(data, {
+      onSuccess: () => {
+        showSnackbar('Usuário registrado com sucesso!', 'success')
+      },
+      onError: () => {
+        showSnackbar('Erro ao registrar usuário.', 'error')
+      },
+      onSettled: () => {
+        setLoading(false)
+      },
+    })
   }
 
   useEffect(() => {
