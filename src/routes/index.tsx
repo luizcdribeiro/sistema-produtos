@@ -7,6 +7,7 @@ import { DashboardLayout } from '../pages/layouts/Dashboard'
 import NewProduct from '../pages/NewProduct'
 import Product from '../pages/Product'
 import EditProduct from '../pages/EditProduct'
+import NotFound from '../pages/404'
 
 export default function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ export default function AppRoutes() {
           <Route path="/produtos/novo" element={<NewProduct />} />
           <Route path="/produtos/:id" element={<Product />} />
           <Route path="/produtos/editar/:id" element={<EditProduct />} />
+          <Route path="/404" element={<NotFound />} />
 
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Route>

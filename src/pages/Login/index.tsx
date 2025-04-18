@@ -24,7 +24,7 @@ export default function Login() {
         navigate('/produtos')
       },
       onError: () => {
-        showSnackbar('Erro ao atualizar produto!', 'error')
+        showSnackbar('Email ou senha incorretos, tente novamente!', 'error')
       },
     })
   }
