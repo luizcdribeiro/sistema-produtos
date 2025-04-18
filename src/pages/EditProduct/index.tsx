@@ -6,10 +6,10 @@ import { useState } from 'react'
 import { schema } from './schema'
 import { useParams } from 'react-router-dom'
 import { Delete } from '@mui/icons-material'
-import { useSnackbar } from '../../hooks/useSnackbar'
-import { FormWrapper } from '../../components/FormWrapper'
-import { useEditProduct, useProduct } from '../../services/productsServices'
-import { Product } from '../../services/productsServices/interfaces'
+import { useSnackbar } from 'hooks/useSnackbar'
+import { FormWrapper } from 'components/FormWrapper'
+import { useEditProduct, useProduct } from 'services/productsServices'
+import { Product } from 'services/productsServices/interfaces'
 
 export default function EditProduct() {
   const { id } = useParams<{ id: string }>()

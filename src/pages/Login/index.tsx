@@ -1,9 +1,9 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { useLoginMutation } from '../../services/authService'
-import { useSnackbar } from '../../hooks/useSnackbar'
-import { FormWrapper } from '../../components/FormWrapper'
+import { useLoginMutation } from 'services/authService'
+import { useSnackbar } from 'hooks/useSnackbar'
+import { FormWrapper } from 'components/FormWrapper'
 import { LoginForm } from './interfaces'
 
 export default function Login() {

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import { endpoints } from '../../utils/endpoints'
+import { endpoints } from 'utils/endpoints'
 import { ViaCepResponse } from './interfaces'
 
 export const fetchAddressByCep = async (cep: string): Promise<ViaCepResponse> => {

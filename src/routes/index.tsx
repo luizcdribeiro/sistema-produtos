@@ -1,13 +1,13 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Register from '../pages/Register'
-import Login from '../pages/Login'
+import Login from 'pages/Login'
 import { ProtectedRoute } from './ProtectedRoute'
-import Products from '../pages/Products'
-import { DashboardLayout } from '../pages/layouts/Dashboard'
-import NewProduct from '../pages/NewProduct'
-import Product from '../pages/Product'
-import EditProduct from '../pages/EditProduct'
-import NotFound from '../pages/404'
+import Products from 'pages/Products'
+import { DashboardLayout } from 'pages/layouts/Dashboard'
+import NewProduct from 'pages/NewProduct'
+import Product from 'pages/Product'
+import EditProduct from 'pages/EditProduct'
+import NotFound from 'pages/404'
+import Register from 'pages/Register'
 
 export default function AppRoutes() {
   return (

@@ -4,9 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { NumericFormat } from 'react-number-format'
 import { useState } from 'react'
 import { schema } from './schema'
-import { useSnackbar } from '../../hooks/useSnackbar'
-import { FormWrapper } from '../../components/FormWrapper'
-import { Product } from '../../services/productsServices/interfaces'
+import { useSnackbar } from 'hooks/useSnackbar'
+import { FormWrapper } from 'components/FormWrapper'
+import { Product } from 'services/productsServices/interfaces'
 
 export default function NewProduct() {
   const [imagePreview, setImagePreview] = useState('')

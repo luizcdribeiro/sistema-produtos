@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { endpoints } from '../../utils/endpoints'
-import queryClient from '../../utils/queryClient'
+import { endpoints } from 'utils/endpoints'
+import queryClient from 'utils/queryClient'
 import { Product } from './interfaces'
 
 export const useProducts = () => {

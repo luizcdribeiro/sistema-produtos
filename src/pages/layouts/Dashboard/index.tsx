@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { Box } from '@mui/material'
-import Sidebar from '../../../components/Siderbar'
-import Header from '../../../components/Header'
+import Sidebar from 'components/Siderbar'
+import Header from 'components/Header'
 
 export const DashboardLayout = () => {
   return (

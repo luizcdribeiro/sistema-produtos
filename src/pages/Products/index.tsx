@@ -18,8 +18,8 @@ import {
 import { useState, useMemo } from 'react'
 import { Visibility } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
-import { useProducts } from '../../services/productsServices'
-import Loading from '../../components/Loading'
+import { useProducts } from 'services/productsServices'
+import Loading from 'components/Loading'
 
 export default function Products() {
   const { data: products = [], isLoading } = useProducts()

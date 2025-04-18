@@ -6,12 +6,12 @@ import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { FormData } from './interfaces'
 import { schema } from './schema'
-import { useRegisterUser } from '../../services/userService'
-import { useSnackbar } from '../../hooks/useSnackbar'
+import { useRegisterUser } from 'services/userService'
+import { useSnackbar } from 'hooks/useSnackbar'
 import { useNavigate } from 'react-router-dom'
-import { FormWrapper } from '../../components/FormWrapper'
-import { cepMask, cpfMask } from '../../utils/form'
-import { useAddressByCep } from '../../services/cepService'
+import { cepMask, cpfMask } from 'utils/form'
+import { useAddressByCep } from 'services/cepService'
+import { FormWrapper } from 'components/FormWrapper'
 
 export default function Register() {
   const {

@@ -11,9 +11,9 @@ import {
   useTheme,
 } from '@mui/material'
 import { useState } from 'react'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from 'context/AuthContext'
 import { Brightness4, Brightness7, Inventory2 } from '@mui/icons-material'
-import { useThemeContext } from '../../context/ThemeContext'
+import { useThemeContext } from 'context/ThemeContext'
 import { Link } from 'react-router-dom'
 
 export default function Header() {
