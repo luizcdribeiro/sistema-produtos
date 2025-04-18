@@ -11,13 +11,13 @@ import {
   DialogContent,
   DialogActions,
   Button,
-  CircularProgress,
 } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { Edit, Delete } from '@mui/icons-material'
 import { useDeleteProduct, useProduct } from '../../services/productsServices'
 import { useSnackbar } from '../../hooks/useSnackbar'
+import Loading from '../../components/Loading'
 
 export default function Product() {
   const { id } = useParams<{ id: string }>()
@@ -47,11 +47,7 @@ export default function Product() {
   }
 
   if (isLoading) {
-    return (
-      <Box display="flex" justifyContent="center" mt={10}>
-        <CircularProgress />
-      </Box>
-    )
+    return <Loading />
   }
 
   if (!produto) {
@@ -76,7 +72,7 @@ export default function Product() {
             <IconButton onClick={() => navigate(`/produtos/editar/${produto.id}`)}>
               <Edit />
             </IconButton>
-            <IconButton onClick={() => setOpenDialog(true)}>
+            <IconButton onClick={() => setOpenDialog(true)} color="warning">
               <Delete />
             </IconButton>
           </>

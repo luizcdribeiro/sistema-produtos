@@ -14,12 +14,12 @@ import {
   TextField,
   Pagination,
   Stack,
-  CircularProgress,
 } from '@mui/material'
 import { useState, useMemo } from 'react'
 import { Visibility } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { useProducts } from '../../services/productsServices'
+import Loading from '../../components/Loading'
 
 export default function Products() {
   const { data: products = [], isLoading } = useProducts()
@@ -40,11 +40,7 @@ export default function Products() {
   const pageCount = Math.ceil(filteredProducts.length / 15)
 
   if (isLoading) {
-    return (
-      <Box display="flex" justifyContent="center" mt={10}>
-        <CircularProgress />
-      </Box>
-    )
+    return <Loading />
   }
 
   return (

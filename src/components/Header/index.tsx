@@ -12,8 +12,9 @@ import {
 } from '@mui/material'
 import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
-import { Brightness4, Brightness7 } from '@mui/icons-material'
+import { Brightness4, Brightness7, Inventory2 } from '@mui/icons-material'
 import { useThemeContext } from '../../context/ThemeContext'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
   const { user, logout } = useAuth()
@@ -38,7 +39,10 @@ export default function Header() {
   return (
     <AppBar position="static" color="default" elevation={1}>
       <Toolbar className={'header'}>
-        <Typography variant="h6">Meu estoque</Typography>
+        <Link to="/produtos" className="logo">
+          <Inventory2 />
+          <Typography variant="h6">Meu Estoque</Typography>
+        </Link>
         <Box className={'userSection'}>
           <IconButton onClick={toggleTheme} color="inherit">
             {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
