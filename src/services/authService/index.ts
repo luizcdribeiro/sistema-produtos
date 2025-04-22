@@ -28,7 +28,6 @@ export const useLoginMutation = () => {
 
       login(user)
       localStorage.setItem('token', user.token)
-      console.log('User logged in:', user)
     },
   })
 }
